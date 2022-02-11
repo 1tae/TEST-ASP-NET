@@ -62,7 +62,7 @@ namespace Memo
 
             con.Open();
             SqlDataAdapter da = new SqlDataAdapter();
-            da.SelectCommand=cmd;
+            da.SelectCommand = cmd;
             da.Fill(dt);
 
             listData.DataSource = dt;

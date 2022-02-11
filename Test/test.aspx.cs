@@ -125,7 +125,122 @@ namespace TestPage
             getMenuList();
         }
 
-        
+        abstract class TestObject
+        {
+            public int atk = 10;
 
+            public TestObject()
+            {
+
+            }
+
+            public TestObject(int atk)
+            {
+                this.atk = atk;
+            }
+
+
+            public virtual void Attack()
+            {
+            }
+
+            public abstract void Deff();
+        }
+
+
+        class Knife : TestObject
+        {
+            public Knife(int atk)
+            {
+                this.atk = atk;
+            }
+
+            public override void Attack()
+            {
+                Console.WriteLine("kkk");
+            }
+
+            public override void Deff()
+            {
+                Console.WriteLine("DDD");
+            }
+
+            public static Knife operator +(Knife a, Knife b)
+            {
+                return new Knife(a.atk + b.atk);
+            }
+        }
+
+        struct StructStudent
+        {
+            public string name;
+            public void Display()
+            {
+                Console.WriteLine(name);
+            }
+        }
+
+        class ClassStudent
+        {
+            public string name;
+            public void Display()
+            {
+                Console.WriteLine(name);
+            }
+        }
+        class Program
+        {
+            static void Change(StructStudent ss, ClassStudent cs)
+            {
+                ss.name = "After";
+                cs.name = "After";
+            }
+            static void Main(string[] args)
+            {
+                StructStudent ss;
+                ss.name = "Before";
+                ClassStudent cs = new ClassStudent();
+                cs.name = "Before";
+
+                Change(ss, cs);
+
+                ss.Display();
+                cs.Display();
+            }
+        }
     }
+
+    class MyException : Exception
+    {
+        public MyException(string message) : base(message)
+        {
+        }
+    }
+
+    class ExceptionTest
+    {
+        static void Main(string[] args)
+        {
+            try
+            {
+                int a;
+                int b;
+                a = Int32.Parse(Console.ReadLine());
+                b = Int32.Parse(Console.ReadLine());
+
+                if (b == 0)
+                {
+                    throw new MyException("0으로 나눌수없어요~");
+                }
+
+                Console.WriteLine(a / b);
+            }
+            catch (MyException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+        }
+    }
+
 }
