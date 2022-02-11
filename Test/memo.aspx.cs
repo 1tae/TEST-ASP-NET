@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
+using System.Web;
 using System.Data.SqlClient;
-using System.Configuration;
 using MasterTest;
 using System.Data;
+using Test;
 
 namespace Memo
 {
     public partial class Memo : Page
     {
+        private SqlConnection con = Global.conn;
         SiteMaster ss = new SiteMaster();
 
         protected void Page_Load(object sender, EventArgs e)
@@ -21,6 +19,7 @@ namespace Memo
             {
                 readMemo();
             }
+
         }
 
         protected void Save_Click(Object sender, EventArgs e)
@@ -53,10 +52,29 @@ namespace Memo
             listData.DataBind();
         }
 
-        protected void HideInput()
+        protected void Search(object sender, EventArgs e)
         {
-            
+            DataTable dt = new DataTable();
+
+            SqlCommand cmd = new SqlCommand("PR_TEST_T04", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("search", searchText.Text);
+
+            con.Open();
+            SqlDataAdapter da = new SqlDataAdapter();
+            da.SelectCommand=cmd;
+            da.Fill(dt);
+
+            listData.DataSource = dt;
+            listData.DataBind();
+
+            cmd.Dispose();
+
+            con.Close();
+
         }
+
+
     }
 
 }

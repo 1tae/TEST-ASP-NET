@@ -1,10 +1,5 @@
 ﻿<%@ Page Title="About" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="memo.aspx.cs" Inherits="Memo.Memo" %>
 
-<script runat="server">
-  
-        
-</script>
-
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server"> 
     <style>
         .memoList td {
@@ -38,6 +33,15 @@
         #tableArea{
             margin-top : 20px;
         }
+
+        .searchArea{
+            margin-top : 20px;
+            width : 300px;
+        }
+
+        .saveBtn {
+            margin-left : 200px;
+        }
         
     </style>
     <div style="margin:50px;">
@@ -47,8 +51,9 @@
             제목 : <asp:TextBox ID="MemoTitle" runat="server" CssClass="memoTitle"></asp:TextBox><br />
             <span style="top:-130px; position:relative;">내용 : </span><asp:TextBox ID="Description" runat="server" TextMode="MultiLine"  CssClass="memoDescription"/>
             <br />
-            <asp:Button ID="Save" runat="server" OnClick="Save_Click" Text="저장" />
+            <asp:Button ID="Save" runat="server" OnClick="Save_Click" Text="저장" CssClass="saveBtn"/>
         </p>
+        <hr />
         <div id="tableArea">
             <table style="width:800px;">
                 <colgroup>
@@ -74,6 +79,10 @@
                     </ItemTemplate>
                 </asp:Repeater>
             </table>
+            <div>
+                <asp:TextBox runat="server" id="searchText" placeholder="제목/내용/작성자 아이디 검색가능" CssClass="searchArea"/>
+                <asp:Button runat="server" id="searchBtn" OnClick="Search" Text="검색"/>
+            </div>
         </div>
     </div>
 </asp:Content>

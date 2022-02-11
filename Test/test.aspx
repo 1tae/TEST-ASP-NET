@@ -30,39 +30,13 @@
     <h4>총 메뉴 개수 : <asp:Label ID="cnt1" runat="server">0</asp:Label></h4>
     <p><asp:Label ID="lblResult" runat="server">버튼 눌러보세요</asp:Label></p>
     <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="초기화" />
-    
+    <ASP:HiddenField id="lastPage" runat="server" Value="1"/>
     <div id="tableArea">
-        <asp:Button ID="Button2" runat="server"  CssClass="btn2" OnClick="Button2_Click" Text="메뉴 리스트 20개 가져오기" data-value="1"/>
         <asp:Table ID="TestTable" runat="server" CssClass="testList"></asp:Table>
-        <asp:Table ID="PageTable" runat="server" CssClass="pageList" >
-             <asp:TableRow>
-                <asp:TableCell CssClass="pageBtn" data-value="1">1</asp:TableCell>      
-                <asp:TableCell CssClass="pageBtn" data-value="2">2</asp:TableCell>      
-                <asp:TableCell CssClass="pageBtn" data-value="3">3</asp:TableCell>      
-                <asp:TableCell CssClass="pageBtn" data-value="4">4</asp:TableCell>      
-             </asp:TableRow> 
-        </asp:Table>
-        
+        <asp:Button Visible="false" Text="<" OnClick="beforePage" runat="server" ID="btnBefore"/>
+        <asp:Label ID="nowPageInfo" runat="server" >1</asp:Label>
+        <ASP:HiddenField id="nowPage" runat="server" Value="1"/>
+        <asp:Button Text=">" OnClick="nextPage" runat="server" ID="btnNext"/>
     </div>
-
-    <script >
-        var nowPage = 1;
-        $(document).ready(function () {
-            setBtnCss();
-
-            $('.pageBtn').on('click', function () {
-                nowPage = $(this).data('value');
-                setBtnCss();
-                $('.btn2').val(nowPage).click();
-            });
-
-        });
-
-        var setBtnCss = function () {
-            $('.pageBtn').removeClass('on');
-            $('.pageBtn[data-value="' + nowPage + '"]').addClass('on');
-        }
-
-
-    </script>
+    
 </asp:Content>
